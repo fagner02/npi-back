@@ -22,6 +22,4 @@ public class CreateProductDTO {
     @Min(value = 0, message = "A quantidade deve ser 0 ou mais")
     @NotNull(message = "A quantidade deve ser fornecida")
     public int quantity;
-
-    public byte[] image;
 }

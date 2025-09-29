@@ -39,7 +39,7 @@ public class UserService implements UserDetailsService {
     }
 
     public User findByEmail(String email) {
-        return userRepo.findByEmail(email).orElseThrow(() -> new NotFoundException("Usuário"));
+        return userRepo.findByEmail(email).orElseThrow(() -> new NotFoundException("Usuário."));
     }
 
     public User post(CreateUserDTO user) {

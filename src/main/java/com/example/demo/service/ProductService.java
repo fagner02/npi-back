@@ -66,12 +66,11 @@ public class ProductService {
         newProduct.description = product.description;
         newProduct.price = product.price;
         newProduct.quantity = product.quantity;
-        newProduct.image = product.image;
         return productRepo.save(newProduct);
     }
 
     public void update(Long id, CreateProductDTO product) {
-        productRepo.findById(id)
+        Product oldProduct =  productRepo.findById(id)
                 .orElseThrow(() -> new NotFoundException("Produto"));
         if (!categoryRepo.existsById(product.categoryId)) {
             throw new IllegalArgumentException("Categoria não existente");
@@ -79,6 +78,7 @@ public class ProductService {
 
         Product newProduct = new Product();
         newProduct.id = id;
+        newProduct.image = oldProduct.image;
         getProduct(product, newProduct);
     }
 
