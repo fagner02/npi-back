@@ -59,7 +59,7 @@ public class ProductService {
             throw new IllegalArgumentException("Categoria não existente");
         }
         Product existent = productRepo.findByName(product.name);
-        if(existent!= null && Objects.equals(existent.category.id, product.categoryId)){
+        if(existent!= null && existent.category!= null && Objects.equals(existent.category.id, product.categoryId)){
             throw new IllegalArgumentException("Produto com mesmo nome e categoria ja existe");
         }
 
