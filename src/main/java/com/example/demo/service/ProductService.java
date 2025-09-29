@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import static com.example.demo.specifications.ProductSpecification.hasNameLike;
 
@@ -47,12 +48,19 @@ public class ProductService {
 
     public byte[] getImage(Long id) {
         Product product = productRepo.findById(id).orElseThrow(() -> new NotFoundException("Produto"));
+        if(product.image == null){
+            throw new RuntimeException("Produto nao possui imagem");
+        }
         return product.image;
     }
 
     public Product post(CreateProductDTO product) {
         if (!categoryRepo.existsById(product.categoryId)) {
             throw new IllegalArgumentException("Categoria não existente");
+        }
+        Product existent = productRepo.findByName(product.name);
+        if(existent!= null && Objects.equals(existent.category.id, product.categoryId)){
+            throw new IllegalArgumentException("Produto com mesmo nome e categoria ja existe");
         }
 
         Product newProduct = new Product();
@@ -75,7 +83,11 @@ public class ProductService {
         if (!categoryRepo.existsById(product.categoryId)) {
             throw new IllegalArgumentException("Categoria não existente");
         }
-
+        if ( oldProduct.category != null) {
+            if (Objects.equals(oldProduct.category.id, product.categoryId)) {
+                throw new IllegalArgumentException("Produto com mesmo nome e categoria ja existe");
+            }
+        }
         Product newProduct = new Product();
         newProduct.id = id;
         newProduct.image = oldProduct.image;

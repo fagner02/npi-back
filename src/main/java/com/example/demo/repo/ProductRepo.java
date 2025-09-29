@@ -12,4 +12,6 @@ import org.springframework.stereotype.Repository;
 public interface ProductRepo extends JpaRepository<Product, Long>, JpaSpecificationExecutor<Product> {
     @NonNull
     Page<Product> findAll(@NonNull Pageable pageable);
+
+    public Product findByName(String name);
 }

@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -31,8 +32,10 @@ public class Product {
     @ManyToOne()
     @JoinColumn(name = "categoryId")
     @JsonIgnoreProperties("products")
+    @Nullable
     public Category category;
 
+    @Nullable
     public byte[] image;
 
     public Product() {
