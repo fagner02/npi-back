@@ -83,14 +83,14 @@ public class ProductService {
         if (!categoryRepo.existsById(product.categoryId)) {
             throw new IllegalArgumentException("Categoria não existente");
         }
-        if ( oldProduct.category != null) {
-            if (Objects.equals(oldProduct.category.id, product.categoryId)) {
+        Product existent = productRepo.findByName(product.name);
+        if (existent != null) {
+            if (Objects.equals(existent.category.id, product.categoryId)) {
                 throw new IllegalArgumentException("Produto com mesmo nome e categoria ja existe");
             }
         }
         Product newProduct = new Product();
         newProduct.id = id;
-        newProduct.image = oldProduct.image;
         getProduct(product, newProduct);
     }
 
