@@ -50,8 +50,8 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.CREATED).body(new DataResponse(productService.post(product)));
     }
 
-    @PostMapping("/image")
-    public ResponseEntity<DataResponse> uploadImage(@RequestParam("image") MultipartFile image, @RequestParam("id") Long id) throws IOException {
+    @PostMapping("/{id}/image")
+    public ResponseEntity<DataResponse> uploadImage(@PathVariable("id") Long id, @RequestParam("image") MultipartFile image) throws IOException {
         productService.uploadImage(image, id);
         return ResponseEntity.ok(null);
     }
