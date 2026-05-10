@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
@@ -36,6 +37,7 @@ public class Product {
     public Category category;
 
     @Nullable
+    @JsonIgnore()
     public byte[] image;
 
     public Product() {
