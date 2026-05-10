@@ -91,6 +91,7 @@ public class ProductService {
         }
         Product newProduct = new Product();
         newProduct.id = id;
+        newProduct.image = oldProduct.image;
         getProduct(product, newProduct);
     }
 
